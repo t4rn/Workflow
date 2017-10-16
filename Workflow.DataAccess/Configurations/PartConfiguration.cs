@@ -25,7 +25,7 @@ namespace Workflow.DataAccess.Configurations
 
             Property(p => p.UnitPrice).HasPrecision(18, 2);
 
-            //Property(p => p.ComputedPrice).HasPrecision(18, 2).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
+            Property(p => p.ComputedPrice).HasPrecision(18, 2).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
             Property(p => p.Notes)
                 .HasMaxLength(140)

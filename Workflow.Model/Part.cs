@@ -9,7 +9,7 @@
         public string InventoryItemName { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-        //public decimal ComputedPrice { get; set; }
+        public decimal ComputedPrice { get; set; }
         public string Notes { get; set; }
         public bool IsInstalled { get; set; }
     }

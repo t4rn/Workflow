@@ -1,11 +1,12 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using Workflow.DataAccess.Configurations;
 using Workflow.DataAccess.Migrations;
 using Workflow.Model;
 
 namespace Workflow.DataAccess
 {
-    public class WorkflowDbContext : DbContext
+    public class WorkflowDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -16,8 +17,13 @@ namespace Workflow.DataAccess
         public DbSet<WorkOrder> WorkOrders { get; set; }
 
         public WorkflowDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
+        }
+
+        public static WorkflowDbContext Create()
+        {
+            return new WorkflowDbContext();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

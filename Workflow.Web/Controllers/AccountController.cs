@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Workflow.Web.Models;
+using Workflow.Model;
 
 namespace Workflow.Web.Controllers
 {
