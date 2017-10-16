@@ -8,6 +8,7 @@ namespace Workflow.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -20,6 +21,7 @@ namespace Workflow.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -18,5 +18,7 @@ namespace Workflow.Model
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 namespace Workflow.DataAccess.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Model;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -14,6 +16,48 @@ namespace Workflow.DataAccess.Migrations
 
         protected override void Seed(Workflow.DataAccess.WorkflowDbContext context)
         {
+            var userManager =
+                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new WorkflowDbContext()));
+
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+            };
+
+            var roleManager =
+                new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(new WorkflowDbContext()));
+
+            string name = "admin@workflow.com";
+            string password = "Pluralsight#1";
+            string firstName = "Admin";
+            string roleName = "Admin";
+
+            var role = roleManager.FindByName(roleName);
+
+            if (role == null)
+            {
+                role = new ApplicationRole(roleName);
+                var roleResult = roleManager.Create(role);
+            }
+
+            var user = userManager.FindByName(name);
+
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = name, Email = name, FirstName = firstName };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            var rolesForUser = userManager.GetRoles(user.Id);
+
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
+
+
+
             string accountNumber = "ABC123";
 
             context.Customers.AddOrUpdate(

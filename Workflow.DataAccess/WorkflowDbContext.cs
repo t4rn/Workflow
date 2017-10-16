@@ -35,6 +35,7 @@ namespace Workflow.DataAccess
             modelBuilder.Configurations.Add(new PartConfiguration());
             modelBuilder.Configurations.Add(new ServiceItemConfiguration());
             modelBuilder.Configurations.Add(new WorkOrderConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
