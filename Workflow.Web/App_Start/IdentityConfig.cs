@@ -13,6 +13,8 @@ using Microsoft.Owin.Security;
 using Workflow.Web.Models;
 using Workflow.Model;
 using Workflow.DataAccess;
+using System.Net.Mail;
+using System.Net;
 
 namespace Workflow.Web
 {
@@ -20,8 +22,22 @@ namespace Workflow.Web
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            const string userName = "mailuser";
+            const string from = "mailer@gmail.com";
+            const string password = "mailpass";
+            const int port = 587;
+
+            var smtpClient = new SmtpClient("smtp.sendgrid.net", port);
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential(userName, password);
+
+            var mailMessage = new MailMessage(from, message.Destination);
+            mailMessage.Subject = message.Subject;
+            mailMessage.Body = message.Body;
+
+            return smtpClient.SendMailAsync(mailMessage);
         }
     }
 
@@ -64,8 +80,8 @@ namespace Workflow.Web
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(1);
+            manager.MaxFailedAccessAttemptsBeforeLockout = 3;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.

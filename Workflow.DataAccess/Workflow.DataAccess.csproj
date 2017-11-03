@@ -77,6 +77,14 @@
     <Compile Include="Migrations\201710161324590_identity.Designer.cs">
       <DependentUpon>201710161324590_identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711021353082_FirstNameRequired.cs" />
+    <Compile Include="Migrations\201711021353082_FirstNameRequired.Designer.cs">
+      <DependentUpon>201711021353082_FirstNameRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711031425427_UserAddress.cs" />
+    <Compile Include="Migrations\201711031425427_UserAddress.Designer.cs">
+      <DependentUpon>201711031425427_UserAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkflowDbContext.cs" />
@@ -100,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710161324590_identity.resx">
       <DependentUpon>201710161324590_identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021353082_FirstNameRequired.resx">
+      <DependentUpon>201711021353082_FirstNameRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031425427_UserAddress.resx">
+      <DependentUpon>201711031425427_UserAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
